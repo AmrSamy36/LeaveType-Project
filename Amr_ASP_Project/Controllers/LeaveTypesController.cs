@@ -123,7 +123,6 @@ namespace Amr_ASP_Project.Controllers
             }
             var leavetype = _repo.FindById(id);
             var model = _mapper.Map<LeaveTypeVM>(leavetype);
-            var isSuccess = _repo.Delete(leavetype);
             return View(model);
         }
 
