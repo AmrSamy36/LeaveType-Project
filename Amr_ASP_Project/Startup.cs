@@ -38,13 +38,19 @@ namespace Amr_ASP_Project
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
             services.AddAutoMapper(typeof(Maps));
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+                              IApplicationBuilder app,
+                              IWebHostEnvironment env,
+                              UserManager<IdentityUser> userManager,
+                              RoleManager<IdentityRole> roleManager
+                             )
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +70,9 @@ namespace Amr_ASP_Project
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+
+            seedData.Seed(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>
             {
