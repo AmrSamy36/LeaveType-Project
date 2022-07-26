@@ -2,6 +2,7 @@
 using Amr_ASP_Project.Data;
 using Amr_ASP_Project.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Linq;
 
 namespace Amr_ASP_Project.Controllers
 {
+        [Authorize(Roles = "Administrator")]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepository _repo;
